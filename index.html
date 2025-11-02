@@ -1,79 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RifqyTranslate</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-      <button onclick="swapLangs()">⇄</button>
+    body {
+      margin: 0;
+      background-color: #ffffff;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
 
-      <select id="toLang">
-        <option value="en">Inggris</option>
-        <option value="id">Indonesia</option>
-        <option value="ja">Jepang</option>
-        <option value="ko">Korea</option>
-        <option value="fr">Prancis</option>
-        <option value="es">Spanyol</option>
-      </select>
-    </div>
+    header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 15px 0;
+    }
 
-    <button style="width: 100%; margin-top: 10px;" onclick="translateText()">Terjemahkan</button>
+    #micBtn {
+      position: absolute;
+      left: 20px;
+      background: none;
+      border: none;
+      color: #4da6ff;
+      font-size: 1.7em;
+      cursor: pointer;
+    }
 
-    <textarea id="outputText" readonly placeholder="Hasil terjemahan akan muncul di sini..."></textarea>
+    h1 {
+      font-size: 2em;
+      font-weight: 700;
+      color: #4da6ff;
+    }
 
-    <div class="buttons">
-      <button onclick="copyText()">📋 Salin</button>
-      <button onclick="speakText()">🔊 Ucapkan</button>
-    </div>
+    .container {
+      width: 90%;
+      max-width: 500px;
+      background: #f9f9f9;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      font-size: 1em;
+      resize: none;
+    }
+
+    select {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      margin: 5px;
+    }
+
+    #translateBtn, #copyBtn, #speakBtn {
+      background-color: #4da6ff;
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      margin: 8px 4px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #translateBtn:hover, #copyBtn:hover, #speakBtn:hover {
+      background-color: #1a8cff;
+    }
+
+    footer {
+      margin-top: 25px;
+      color: #666;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button id="micBtn" title="Rekam suara">🎤</button>
+    <h1>RifqyTranslate</h1>
+  </header>
+
+  <div class="container">
+    <textarea id="inputText" placeholder="Ketik atau ucapkan sesuatu..."></textarea><br>
+    <select id="fromLang">
+      <option value="id">Indonesia</option>
+      <option value="en">Inggris</option>
+      <option value="ja">Jepang</option>
+      <option value="fr">Prancis</option>
+    </select>
+    <select id="toLang">
+      <option value="en">Inggris</option>
+      <option value="id">Indonesia</option>
+      <option value="ja">Jepang</option>
+      <option value="fr">Prancis</option>
+    </select><br>
+    <button id="translateBtn">Terjemahkan</button><br>
+    <textarea id="outputText" readonly placeholder="Hasil terjemahan akan muncul di sini..."></textarea><br>
+    <button id="copyBtn">Salin</button>
+    <button id="speakBtn">Ucapkan</button>
   </div>
 
   <footer>© 2025 RifqyTranslate. All rights reserved.</footer>
 
   <script>
-    function toggleTheme() {
-      document.body.classList.toggle('light');
-      const btn = document.querySelector('.toggle');
-      btn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
-    }
+    const inputText = document.getElementById("inputText");
+    const outputText = document.getElementById("outputText");
+    const micBtn = document.getElementById("micBtn");
 
-    function swapLangs() {
-      const from = document.getElementById('fromLang');
-      const to = document.getElementById('toLang');
-      const temp = from.value;
-      from.value = to.value;
-      to.value = temp;
-    }
-
-    async function translateText() {
-      const input = document.getElementById('inputText').value;
-      const from = document.getElementById('fromLang').value;
-      const to = document.getElementById('toLang').value;
-
-      if (!input) {
-        alert('Masukkan teks terlebih dahulu.');
+    // 🎤 Rekam suara
+    micBtn.addEventListener("click", () => {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert("Browser kamu tidak mendukung Speech Recognition 😞");
         return;
       }
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = document.getElementById("fromLang").value;
+      recognition.start();
+      recognition.onresult = (event) => {
+        inputText.value = event.results[0][0].transcript;
+      };
+      recognition.onerror = () => alert("Gagal mengenali suara 😅");
+    });
 
-      try {
-        const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(input)}&langpair=${from}|${to}`);
-        const data = await res.json();
-        document.getElementById('outputText').value = data.responseData.translatedText;
-      } catch (e) {
-        document.getElementById('outputText').value = '⚠️ Gagal menerjemahkan.';
-      }
-    }
+    // 🌐 Translate
+    document.getElementById("translateBtn").addEventListener("click", async () => {
+      const text = inputText.value;
+      const from = document.getElementById("fromLang").value;
+      const to = document.getElementById("toLang").value;
+      if (!text) return alert("Masukkan teks dulu!");
 
-    function copyText() {
-      const output = document.getElementById('outputText');
-      output.select();
-      document.execCommand('copy');
-      alert('Teks berhasil disalin!');
-    }
+      const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`);
+      const data = await res.json();
+      outputText.value = data.responseData.translatedText;
+    });
 
-    function speakText() {
-      const text = document.getElementById('outputText').value;
-      if (!text) {
-        alert('Tidak ada teks untuk diucapkan.');
-        return;
-      }
-      const speech = new SpeechSynthesisUtterance(text);
-      speech.lang = document.getElementById('toLang').value;
-      speechSynthesis.speak(speech);
-    }
+    // 📋 Salin teks
+    document.getElementById("copyBtn").addEventListener("click", () => {
+      navigator.clipboard.writeText(outputText.value);
+      alert("✅ Teks disalin!");
+    });
+
+    // 🔊 Ucapkan hasil
+    document.getElementById("speakBtn").addEventListener("click", () => {
+      const msg = new SpeechSynthesisUtterance(outputText.value);
+      msg.lang = document.getElementById("toLang").value;
+      speechSynthesis.speak(msg);
+    });
   </script>
 </body>
 </html>
