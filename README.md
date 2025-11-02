@@ -2,7 +2,7 @@
 
 **Translator Profesional – Cepat, Ringan, & Otomatis Dark/Light Mode**
 
-> **Terjemahkan teks Indonesia ↔ Inggris (dan 6+ bahasa lainnya) hanya dengan 1 klik!**  
+> **Terjemahkan teks Indonesia ↔ Inggris (dan 6+ bahasa lainnya)**  
 > Dibuat oleh [Rifqy Aditya](https://rifqydev.my.id)
 
 ---
@@ -47,7 +47,7 @@
 
 ## 🛠️ Tech Stack
 
-- **HTML5, CSS3, JavaScript (Vanilla)**
+- **HTML, CSS, JavaScript (Vanilla)**
 - **GitHub Pages** (Hosting gratis)
 - **PWA Ready** (Installable di HP)
 - **Responsive Design** (Mobile-first)
@@ -57,9 +57,7 @@
 ## 🔧 Ingin Berkontribusi?
 
 Kami **terbuka untuk kontribusi**!  
-Silahkan:
+Silahkan Hubungi:
 
 ```bash
-git clone https://github.com/devs29/rifqytranslate.git
-cd rifqytranslate
-# Edit file → commit → pull request
+rifqydev@gmail.com
