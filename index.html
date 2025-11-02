@@ -5,228 +5,205 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RifqyTranslate</title>
   <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      background-color: #f9f9f9;
-      color: #111;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      transition: 0.3s;
+    :root {
+      --bg: #ffffff;
+      --card: #f8faff;
+      --text: #1e1e1e;
+      --accent: #2196f3;
+      --hover: #42a5f5;
+      --border: #90caf9;
     }
 
-    .dark-mode {
-      background-color: #0d1117;
-      color: #fff;
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --card: #161b22;
+        --text: #e0e0e0;
+        --accent: #2196f3;
+        --hover: #42a5f5;
+        --border: #2b4d7a;
+      }
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+      margin: 0;
+      transition: background 0.3s, color 0.3s;
     }
 
     h1 {
-      text-align: center;
       font-size: 2rem;
-      color: #3399ff;
+      color: var(--accent);
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: var(--card);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+      padding: 25px;
       width: 90%;
-      max-width: 400px;
-      transition: 0.3s;
-    }
-
-    .dark-mode .container {
-      background: #161b22;
+      max-width: 420px;
+      text-align: center;
+      transition: background 0.3s;
     }
 
     textarea {
       width: 100%;
       height: 90px;
-      border-radius: 12px;
-      border: 1px solid #ccc;
-      padding: 10px;
+      border: 1.8px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 15px;
       resize: none;
       outline: none;
-      font-size: 1rem;
-      background: inherit;
-      color: inherit;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    select, button {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 15px;
+      margin: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.25s;
     }
 
     select {
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-      background: #3399ff;
-      color: white;
-      font-weight: 600;
-    }
-
-    .switch-btn {
-      background: #3399ff;
-      border: none;
-      padding: 8px 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      color: white;
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
     }
 
     button {
-      margin-top: 10px;
-      width: 100%;
-      padding: 10px;
-      background: #3399ff;
+      background: var(--accent);
       color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
+      font-weight: bold;
     }
 
     button:hover {
-      opacity: 0.9;
+      background: var(--hover);
     }
 
-    .btn-row {
+    .lang-select {
       display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      margin: 10px 0;
     }
 
-    .btn-small {
-      width: 48%;
-      padding: 10px;
-      background: #3399ff;
-      border: none;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
+    .output {
+      margin-top: 15px;
     }
 
     footer {
       margin-top: 20px;
-      font-size: 0.85rem;
-      color: gray;
-    }
-
-    .theme-toggle {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 1.3rem;
-      cursor: pointer;
-    }
-
-    .mic-btn {
-      position: absolute;
-      left: 20px;
-      bottom: 145px;
-      background: transparent;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #3399ff;
+      font-size: 13px;
+      color: var(--text);
+      opacity: 0.7;
     }
   </style>
 </head>
 <body>
-
-  <div class="theme-toggle" id="themeToggle">☀️</div>
-
   <h1>🎤 RifqyTranslate</h1>
-
   <div class="container">
     <textarea id="inputText" placeholder="Masukkan teks di sini..."></textarea>
 
-    <button class="mic-btn" id="micBtn">🎙️</button>
-
-    <div style="display: flex; justify-content: space-between; align-items: center; margin: 10px 0;">
+    <div class="lang-select">
       <select id="fromLang">
         <option value="id">Indonesia</option>
         <option value="en">Inggris</option>
-        <option value="ar">Arab</option>
+        <option value="fr">Prancis</option>
+        <option value="es">Spanyol</option>
+        <option value="de">Jerman</option>
         <option value="ja">Jepang</option>
-        <option value="ko">Korea</option>
       </select>
 
-      <button class="switch-btn" id="switchLang">»«</button>
+      <button id="swapBtn">↔</button>
 
       <select id="toLang">
         <option value="en">Inggris</option>
         <option value="id">Indonesia</option>
-        <option value="ar">Arab</option>
+        <option value="fr">Prancis</option>
+        <option value="es">Spanyol</option>
+        <option value="de">Jerman</option>
         <option value="ja">Jepang</option>
-        <option value="ko">Korea</option>
       </select>
     </div>
 
     <button id="translateBtn">🔍 Terjemahkan</button>
 
-    <textarea id="outputText" readonly placeholder="Hasil terjemahan..."></textarea>
+    <div class="output">
+      <textarea id="outputText" placeholder="Hasil terjemahan..." readonly></textarea>
+    </div>
 
-    <div class="btn-row">
-      <button class="btn-small" id="copyBtn">📋 Salin</button>
-      <button class="btn-small" id="speakBtn">🔊 Ucapkan</button>
+    <div>
+      <button id="copyBtn">📋 Salin</button>
+      <button id="speakBtn">🔊 Ucapkan</button>
     </div>
   </div>
 
   <footer>© 2025 RifqyTranslate. All rights reserved.</footer>
 
   <script>
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.onclick = () => {
-      document.body.classList.toggle('dark-mode');
-      themeToggle.textContent = document.body.classList.contains('dark-mode') ? '🌙' : '☀️';
-    };
+    const translateBtn = document.getElementById("translateBtn");
+    const swapBtn = document.getElementById("swapBtn");
+    const inputText = document.getElementById("inputText");
+    const outputText = document.getElementById("outputText");
+    const fromLang = document.getElementById("fromLang");
+    const toLang = document.getElementById("toLang");
+    const copyBtn = document.getElementById("copyBtn");
+    const speakBtn = document.getElementById("speakBtn");
 
-    const switchLang = document.getElementById('switchLang');
-    switchLang.onclick = () => {
-      let from = document.getElementById('fromLang');
-      let to = document.getElementById('toLang');
-      [from.value, to.value] = [to.value, from.value];
-    };
-
-    document.getElementById('translateBtn').onclick = async () => {
-      let text = document.getElementById('inputText').value;
-      let from = document.getElementById('fromLang').value;
-      let to = document.getElementById('toLang').value;
-
+    translateBtn.addEventListener("click", async () => {
+      const text = inputText.value.trim();
       if (!text) return alert("Masukkan teks terlebih dahulu!");
 
-      const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`);
-      const data = await res.json();
-      document.getElementById('outputText').value = data.responseData.translatedText;
-    };
+      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${fromLang.value}|${toLang.value}`;
 
-    document.getElementById('copyBtn').onclick = () => {
-      navigator.clipboard.writeText(document.getElementById('outputText').value);
-      alert("✅ Hasil terjemahan disalin!");
-    };
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        outputText.value = data.responseData.translatedText;
+      } catch (err) {
+        outputText.value = "Terjadi kesalahan. Coba lagi.";
+      }
+    });
 
-    document.getElementById('speakBtn').onclick = () => {
-      const utterance = new SpeechSynthesisUtterance(document.getElementById('outputText').value);
-      utterance.lang = document.getElementById('toLang').value;
-      speechSynthesis.speak(utterance);
-    };
+    swapBtn.addEventListener("click", () => {
+      const temp = fromLang.value;
+      fromLang.value = toLang.value;
+      toLang.value = temp;
 
-    // 🎤 Voice Recognition (input)
-    const micBtn = document.getElementById('micBtn');
-    micBtn.onclick = () => {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = document.getElementById('fromLang').value;
-      recognition.start();
+      const tempText = inputText.value;
+      inputText.value = outputText.value;
+      outputText.value = tempText;
+    });
 
-      recognition.onresult = (event) => {
-        document.getElementById('inputText').value = event.results[0][0].transcript;
-      };
-    };
+    copyBtn.addEventListener("click", () => {
+      navigator.clipboard.writeText(outputText.value);
+      alert("Teks disalin ke clipboard!");
+    });
+
+    speakBtn.addEventListener("click", () => {
+      const utter = new SpeechSynthesisUtterance(outputText.value);
+      utter.lang = toLang.value;
+      speechSynthesis.speak(utter);
+    });
   </script>
-
 </body>
 </html>
