@@ -1,9 +1,9 @@
-# RifqyTranslate# RifqyTranslate 🌍✨
+# RifqyTranslate✨
 
 **Translator Profesional – Cepat, Ringan, & Otomatis Dark/Light Mode**
 
 > **Terjemahkan teks Indonesia ↔ Inggris (dan 6+ bahasa lainnya) hanya dengan 1 klik!**  
-> Dibuat dengan oleh [Rifqy Aditya](https://rifqydev.my.id)
+> Dibuat oleh [Rifqy Aditya](https://rifqydev.my.id)
 
 ---
 
@@ -11,12 +11,12 @@
 
 | Fitur | Deskripsi |
 |------|----------|
-| **6+ Bahasa** | Indonesia, Inggris, Jepang, Korea, Prancis, Spanyol (dan mudah ditambah!) |
+| **6+ Bahasa** | Indonesia, Inggris, Jepang, Korea, Prancis, Spanyol |
 | **Auto Dark/Light Mode** | Ikut tema HP otomatis (🌙/☀️) |
 | **Copy & Ucapkan** | Salin hasil atau dengar pengucapan langsung |
 | **Real-Time Ready** | Siap upgrade ke auto-translate saat mengetik |
 | **PWA (Installable)** | Bisa dipasang di HP seperti aplikasi |
-| **100% Gratis & Open Source** | Gunakan, modifikasi, bagikan! |
+| **100% Gratis & Open Source** | Gunakan, modifikasi, dan bagikan! |
 
 ---
 
