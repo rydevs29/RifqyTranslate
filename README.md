@@ -22,7 +22,7 @@
 
 ## 🖥️ Demo Langsung
 
-👉 [**Coba Sekarang!**](https://rydevs29.github.io/rifqytranslate)  
+👉 [**Coba Sekarang!**](https://rydevs29.github.io/RifqyTranslate/)  
 *(Akses via HP/PC – otomatis menyesuaikan tema)*
 
 ---
@@ -37,7 +37,7 @@
 
 ## ⚡ Cara Pakai
 
-1. Buka [RifqyTranslate](https://rydevs29.github.io/rifqytranslate)
+1. Buka [RifqyTranslate](https://rydevs29.github.io/RifqyTranslate/)
 2. Ketik teks di kolom atas
 3. Pilih bahasa sumber & tujuan
 4. Klik **Terjemahkan**
