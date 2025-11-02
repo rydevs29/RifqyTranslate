@@ -57,7 +57,7 @@
 ## 🔧 Ingin Berkontribusi?
 
 Kami **terbuka untuk kontribusi**!  
-Silahkan Hubungi:
+Silahkan Hubungi Kami:
 
 ```bash
 rifqydev@gmail.com
