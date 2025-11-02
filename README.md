@@ -31,7 +31,7 @@
 
 | Dark Mode | Light Mode |
 |---------|----------|
-| ![Dark Mode](screenshots/dark.png) | ![Light Mode](screenshots/light.png) |
+| ![Dark Mode](https://github.com/rydevs29/RifqyTranslate/blob/main/IMG_20251102_140436.jpg) | ![Light Mode](screenshots/light.png) |
 
 ---
 
