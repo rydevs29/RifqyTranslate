@@ -13,10 +13,10 @@ document.getElementById("translateBtn").addEventListener("click", async () => {
   output.value = "⏳ Menerjemahkan...";
 
   try {
-    const response = await fetch(
+    const res = await fetch(
       `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${fromLang.value}|${toLang.value}`
     );
-    const data = await response.json();
+    const data = await res.json();
     output.value = data.responseData.translatedText || "❌ Gagal menerjemahkan.";
   } catch {
     output.value = "🚫 Tidak dapat terhubung ke server penerjemah.";
