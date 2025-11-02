@@ -3,59 +3,223 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RifqyTranslate 🌍</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>RifqyTranslate 🌐</title>
+  <style>
+    :root {
+      --bg-color: #0d1117;
+      --text-color: #ffffff;
+      --accent: #00ff80;
+      --card-bg: #161b22;
+    }
+
+    body.light {
+      --bg-color: #f8f9fa;
+      --text-color: #222;
+      --card-bg: #ffffff;
+      --accent: #007bff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.2em;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--card-bg);
+      border: none;
+      border-radius: 20px;
+      padding: 6px 10px;
+      color: var(--text-color);
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(0, 255, 128, 0.1);
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 1em;
+      margin-bottom: 15px;
+      background: var(--bg-color);
+      color: var(--text-color);
+      resize: none;
+    }
+
+    select, button {
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    select {
+      background: var(--card-bg);
+      color: var(--text-color);
+    }
+
+    button {
+      background: var(--accent);
+      color: #000;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+
+  </style>
 </head>
 <body>
+  <button class="toggle" onclick="toggleTheme()">🌙</button>
+
   <header>
-    <h1><span>Rifqy</span>Translate 🌍</h1>
-    <p>Translator Gratis by Rifqy Aditya</p>
+    <h1><span>Rifqy</span>Translate 🌐</h1>
+    <p>Translator profesional buatan Rifqy Aditya</p>
   </header>
 
-  <main>
-    <div class="translator-box">
-      <div class="input-section">
-        <textarea id="inputText" placeholder="Ketik teks di sini..."></textarea>
-      </div>
+  <div class="card">
+    <textarea id="inputText" placeholder="Ketik teks di sini..."></textarea>
 
-      <div class="controls">
-        <select id="fromLang">
-          <option value="id">Indonesia</option>
-          <option value="en">Inggris</option>
-          <option value="fr">Prancis</option>
-          <option value="ja">Jepang</option>
-          <option value="ko">Korea</option>
-          <option value="ar">Arab</option>
-        </select>
+    <div style="display: flex; justify-content: space-between; gap: 10px;">
+      <select id="fromLang">
+        <option value="id">Indonesia</option>
+        <option value="en">Inggris</option>
+        <option value="ja">Jepang</option>
+        <option value="ko">Korea</option>
+        <option value="fr">Prancis</option>
+        <option value="es">Spanyol</option>
+      </select>
 
-        <button id="swapBtn">⇄</button>
+      <button onclick="swapLangs()">⇄</button>
 
-        <select id="toLang">
-          <option value="en">Inggris</option>
-          <option value="id">Indonesia</option>
-          <option value="fr">Prancis</option>
-          <option value="ja">Jepang</option>
-          <option value="ko">Korea</option>
-          <option value="ar">Arab</option>
-        </select>
-
-        <button id="translateBtn">Terjemahkan</button>
-      </div>
-
-      <div class="output-section">
-        <textarea id="outputText" placeholder="Hasil terjemahan akan muncul di sini..." readonly></textarea>
-        <div class="actions">
-          <button id="copyBtn">📋 Salin</button>
-          <button id="speakBtn">🔊 Ucapkan</button>
-        </div>
-      </div>
+      <select id="toLang">
+        <option value="en">Inggris</option>
+        <option value="id">Indonesia</option>
+        <option value="ja">Jepang</option>
+        <option value="ko">Korea</option>
+        <option value="fr">Prancis</option>
+        <option value="es">Spanyol</option>
+      </select>
     </div>
-  </main>
 
-  <footer>
-    <p>Made with ❤️ by <strong>Rifqy Aditya</strong></p>
-  </footer>
+    <button style="width: 100%; margin-top: 10px;" onclick="translateText()">Terjemahkan</button>
 
-  <script src="script.js"></script>
+    <textarea id="outputText" readonly placeholder="Hasil terjemahan akan muncul di sini..."></textarea>
+
+    <div class="buttons">
+      <button onclick="copyText()">📋 Salin</button>
+      <button onclick="speakText()">🔊 Ucapkan</button>
+    </div>
+  </div>
+
+  <footer>© 2025 Rifqy Aditya — Semua hak cipta dilindungi</footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+      const btn = document.querySelector('.toggle');
+      btn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+    }
+
+    function swapLangs() {
+      const from = document.getElementById('fromLang');
+      const to = document.getElementById('toLang');
+      const temp = from.value;
+      from.value = to.value;
+      to.value = temp;
+    }
+
+    async function translateText() {
+      const input = document.getElementById('inputText').value;
+      const from = document.getElementById('fromLang').value;
+      const to = document.getElementById('toLang').value;
+
+      if (!input) {
+        alert('Masukkan teks terlebih dahulu.');
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(input)}&langpair=${from}|${to}`);
+        const data = await res.json();
+        document.getElementById('outputText').value = data.responseData.translatedText;
+      } catch (e) {
+        document.getElementById('outputText').value = '⚠️ Gagal menerjemahkan.';
+      }
+    }
+
+    function copyText() {
+      const output = document.getElementById('outputText');
+      output.select();
+      document.execCommand('copy');
+      alert('Teks berhasil disalin!');
+    }
+
+    function speakText() {
+      const text = document.getElementById('outputText').value;
+      if (!text) {
+        alert('Tidak ada teks untuk diucapkan.');
+        return;
+      }
+      const speech = new SpeechSynthesisUtterance(text);
+      speech.lang = document.getElementById('toLang').value;
+      speechSynthesis.speak(speech);
+    }
+  </script>
 </body>
 </html>
