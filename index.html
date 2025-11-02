@@ -5,29 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RifqyTranslate</title>
   <style>
+    :root {
+      --primary: #4da6ff;
+      --bg: #ffffff;
+      --text: #000000;
+      --card: #f2f2f2;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0d1117;
+      --text: #f0f0f0;
+      --card: #161b22;
+    }
+
     * {
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
     }
 
     body {
-      margin: 0;
-      background-color: #ffffff;
-      color: #000;
+      background-color: var(--bg);
+      color: var(--text);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
+      margin: 0;
+      padding: 0 1rem;
+      transition: all 0.3s ease;
     }
 
     header {
-      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      padding: 15px 0;
+      width: 100%;
+      margin-bottom: 1rem;
     }
 
     #micBtn {
@@ -35,25 +50,37 @@
       left: 20px;
       background: none;
       border: none;
-      color: #4da6ff;
       font-size: 1.7em;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    #themeToggle {
+      position: absolute;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.4em;
+      color: var(--primary);
       cursor: pointer;
     }
 
     h1 {
       font-size: 2em;
       font-weight: 700;
-      color: #4da6ff;
+      color: var(--primary);
+      margin: 0;
     }
 
     .container {
-      width: 90%;
-      max-width: 500px;
-      background: #f9f9f9;
+      background-color: var(--card);
       padding: 25px;
       border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 480px;
       text-align: center;
+      transition: 0.3s;
     }
 
     textarea {
@@ -61,22 +88,43 @@
       height: 100px;
       padding: 12px;
       border-radius: 12px;
-      border: 1px solid #ccc;
+      border: none;
+      background: var(--bg);
+      color: var(--text);
       margin-bottom: 10px;
       font-size: 1em;
       resize: none;
+      outline: none;
     }
 
     select {
       padding: 10px;
       border-radius: 10px;
-      border: 1px solid #ccc;
+      border: none;
+      background: var(--bg);
+      color: var(--text);
       font-size: 1em;
       margin: 5px;
+      outline: none;
+    }
+
+    #swapBtn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #swapBtn:hover {
+      background: #1a8cff;
     }
 
     #translateBtn, #copyBtn, #speakBtn {
-      background-color: #4da6ff;
+      background-color: var(--primary);
       border: none;
       color: white;
       padding: 12px 20px;
@@ -85,6 +133,9 @@
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     #translateBtn:hover, #copyBtn:hover, #speakBtn:hover {
@@ -93,8 +144,8 @@
 
     footer {
       margin-top: 25px;
-      color: #666;
       font-size: 0.9em;
+      color: #777;
     }
   </style>
 </head>
@@ -102,26 +153,36 @@
   <header>
     <button id="micBtn" title="Rekam suara">🎤</button>
     <h1>RifqyTranslate</h1>
+    <button id="themeToggle" title="Ganti tema">🌙</button>
   </header>
 
   <div class="container">
     <textarea id="inputText" placeholder="Ketik atau ucapkan sesuatu..."></textarea><br>
-    <select id="fromLang">
-      <option value="id">Indonesia</option>
-      <option value="en">Inggris</option>
-      <option value="ja">Jepang</option>
-      <option value="fr">Prancis</option>
-    </select>
-    <select id="toLang">
-      <option value="en">Inggris</option>
-      <option value="id">Indonesia</option>
-      <option value="ja">Jepang</option>
-      <option value="fr">Prancis</option>
-    </select><br>
-    <button id="translateBtn">Terjemahkan</button><br>
+
+    <div>
+      <select id="fromLang">
+        <option value="id">Indonesia</option>
+        <option value="en">Inggris</option>
+        <option value="ja">Jepang</option>
+        <option value="fr">Prancis</option>
+      </select>
+
+      <button id="swapBtn" title="Tukar bahasa">⇄</button>
+
+      <select id="toLang">
+        <option value="en">Inggris</option>
+        <option value="id">Indonesia</option>
+        <option value="ja">Jepang</option>
+        <option value="fr">Prancis</option>
+      </select>
+    </div>
+
+    <button id="translateBtn">🔍 Terjemahkan</button><br>
+
     <textarea id="outputText" readonly placeholder="Hasil terjemahan akan muncul di sini..."></textarea><br>
-    <button id="copyBtn">Salin</button>
-    <button id="speakBtn">Ucapkan</button>
+
+    <button id="copyBtn">📋 Salin</button>
+    <button id="speakBtn">🔊 Ucapkan</button>
   </div>
 
   <footer>© 2025 RifqyTranslate. All rights reserved.</footer>
@@ -129,7 +190,9 @@
   <script>
     const inputText = document.getElementById("inputText");
     const outputText = document.getElementById("outputText");
+    const themeToggle = document.getElementById("themeToggle");
     const micBtn = document.getElementById("micBtn");
+    const swapBtn = document.getElementById("swapBtn");
 
     // 🎤 Rekam suara
     micBtn.addEventListener("click", () => {
@@ -146,7 +209,29 @@
       recognition.onerror = () => alert("Gagal mengenali suara 😅");
     });
 
-    // 🌐 Translate
+    // 🔄 Tukar bahasa
+    swapBtn.addEventListener("click", () => {
+      const from = document.getElementById("fromLang");
+      const to = document.getElementById("toLang");
+      [from.value, to.value] = [to.value, from.value];
+      const tempText = inputText.value;
+      inputText.value = outputText.value;
+      outputText.value = tempText;
+    });
+
+    // 🌗 Ganti tema
+    themeToggle.addEventListener("click", () => {
+      const current = document.body.getAttribute("data-theme");
+      if (current === "dark") {
+        document.body.setAttribute("data-theme", "light");
+        themeToggle.textContent = "🌙";
+      } else {
+        document.body.setAttribute("data-theme", "dark");
+        themeToggle.textContent = "☀️";
+      }
+    });
+
+    // 🌐 Terjemahkan
     document.getElementById("translateBtn").addEventListener("click", async () => {
       const text = inputText.value;
       const from = document.getElementById("fromLang").value;
