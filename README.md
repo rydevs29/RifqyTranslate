@@ -1,4 +1,4 @@
-# RifqyTranslate✨
+# RifqyTranslate
 
 **Translator Profesional – Cepat, Ringan, & Otomatis Dark/Light Mode**
 
