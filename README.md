@@ -37,7 +37,7 @@
 
 ## ⚡ Cara Pakai
 
-1. Buka [RifqyTranslate](https://rydevs29.github.io/RifqyTranslate/)
+1. Buka [RifqyTranslate](https://translate.rifqydev.my.id)
 2. Ketik teks di kolom atas
 3. Pilih bahasa sumber & tujuan
 4. Klik **Terjemahkan**
